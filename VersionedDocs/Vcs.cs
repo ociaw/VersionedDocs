@@ -1,8 +1,5 @@
 using Microsoft.Extensions.Logging;
 using Statiq.CodeAnalysis;
-using Statiq.Common;
-using Statiq.Core;
-using Statiq.Docs;
 
 namespace Ociaw.VersionedDocs;
 
