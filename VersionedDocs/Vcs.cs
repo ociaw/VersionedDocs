@@ -1,3 +1,4 @@
+using System.Globalization;
 using Microsoft.Extensions.Logging;
 using Statiq.CodeAnalysis;
 
@@ -85,9 +86,13 @@ public sealed class Vcs : Pipeline
             new SetMetadata(VcsKeys.RevisionId,
                 Config.FromDocument(async doc => (await doc.GetContentStringAsync()).Split(' ')[0])
             ),
-            new SetMetadata(VcsKeys.RevisionTimestamp,
-                Config.FromDocument(async doc => (await doc.GetContentStringAsync()).Split(' ')[1])
-            ),
+            new SetMetadata(VcsKeys.RevisionTimestamp, Config.FromDocument(async doc =>
+            {
+                var str = (await doc.GetContentStringAsync()).Split(' ')[1];
+                var epochSeconds = Decimal.Parse(str, CultureInfo.InvariantCulture);
+                var epochMillis = epochSeconds * 1000;
+                return DateTimeOffset.FromUnixTimeMilliseconds((Int64)epochMillis);
+            })),
             new SetContent(new NullContent())
         };
     }
