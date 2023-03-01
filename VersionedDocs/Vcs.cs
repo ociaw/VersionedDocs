@@ -51,17 +51,17 @@ public sealed class Vcs : Pipeline
                     return context.CreateDocument(source, destination, metadata, new NullContent());
                 });
             })),
-            new ExecuteSwitch(Config.FromSetting<RepositoryType>(VersionedDocsKeys.RepositoryType)).Case(RepositoryType.Hg,
-                new StartProcess(Config.FromSetting(VersionedDocsKeys.HgExecutable))
+            new ExecuteSwitch(Config.FromSetting(VersionedDocsKeys.RepositoryType, RepositoryType.Git)).Case(RepositoryType.Hg,
+                new StartProcess(Config.FromSetting(VersionedDocsKeys.HgExecutable, "hg"))
                     .WithArgument("clone")
                     .WithArgument(Config.FromSetting(VersionedDocsKeys.RepositoryPath))
                     .WithArgument(Config.FromDocument(doc => doc.GetString(VcsKeys.RepositoryRoot))),
-                new StartProcess(Config.FromSetting(VersionedDocsKeys.HgExecutable))
+                new StartProcess(Config.FromSetting(VersionedDocsKeys.HgExecutable, "hg"))
                     .WithWorkingDirectory(Config.FromDocument(doc => doc.GetString(VcsKeys.RepositoryRoot)))
                     .WithArgument("update")
                     .WithArgument("--rev")
                     .WithArgument(Config.FromDocument(doc => doc.GetString(VcsKeys.RevisionSelector))),
-                new StartProcess(Config.FromSetting(VersionedDocsKeys.HgExecutable))
+                new StartProcess(Config.FromSetting(VersionedDocsKeys.HgExecutable, "hg"))
                     .WithWorkingDirectory(Config.FromDocument(doc => doc.GetString(VcsKeys.RepositoryRoot)))
                     .WithArgument("id")
                     .WithArgument("--debug")
@@ -70,13 +70,13 @@ public sealed class Vcs : Pipeline
                     .WithArgument("--rev")
                     .WithArgument(Config.FromDocument(doc => doc.GetString(VcsKeys.RevisionSelector)))
             ).Case(RepositoryType.Git,
-                new StartProcess(Config.FromSetting(VersionedDocsKeys.GitExecutable))
+                new StartProcess(Config.FromSetting(VersionedDocsKeys.GitExecutable, "git"))
                     .WithArgument("clone")
                     .WithArgument("--branch")
                     .WithArgument(Config.FromDocument(doc => doc.GetString(VcsKeys.RevisionSelector)))
                     .WithArgument(Config.FromSetting(VersionedDocsKeys.RepositoryPath))
                     .WithArgument(Config.FromDocument(doc => doc.GetString(VcsKeys.RepositoryRoot))),
-                new StartProcess(Config.FromSetting(VersionedDocsKeys.GitExecutable))
+                new StartProcess(Config.FromSetting(VersionedDocsKeys.GitExecutable, "git"))
                     .WithWorkingDirectory(Config.FromDocument(doc => doc.GetString(VcsKeys.RepositoryRoot)))
                     .WithArgument("log")
                     .WithArgument("-1")
