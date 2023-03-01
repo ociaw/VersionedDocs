@@ -33,7 +33,7 @@ public sealed class VersionedApi : Pipeline
             new GroupDocuments(VcsKeys.RevisionName),
             new CacheDocuments(
                 new ExecuteOverChildDocuments(
-                    new CopyMetadataAfterChildExecution(VcsKeys.RevisionName,
+                    new CopyMetadataAfterChildExecution(VcsKeys.RevisionName, VcsKeys.RevisionId, VcsKeys.RevisionTimestamp,
                         new ExecuteConfig(Config.FromContext(ctx =>
                             new AnalyzeCSharp()
                                 .WhereNamespaces(ctx.Settings.GetBool(DocsKeys.IncludeGlobalNamespace))
