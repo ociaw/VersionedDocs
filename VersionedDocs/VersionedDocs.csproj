@@ -11,11 +11,12 @@
     </PropertyGroup>
 
     <PropertyGroup>
-        <PackageId>Ociaw.Statiq.VersionedDocs</PackageId>
+        <PackageId>Ociaw.VersionedDocs</PackageId>
         <Description>Builds on top of Statiq Docs to add support for multiple API versions.</Description>
         <PackageTags>Statiq Docs Documentation</PackageTags>
         <Authors>ociaw</Authors>
         <Company>ociaw</Company>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <PackageProjectUrl>https://github.com/ociaw/VersionedDocs</PackageProjectUrl>
         <RepositoryUrl>https://github.com/ociaw/VersionedDocs.git</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
