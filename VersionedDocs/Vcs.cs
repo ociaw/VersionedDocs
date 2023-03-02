@@ -71,7 +71,12 @@ public sealed class Vcs : Pipeline
                     .WithArgument(Config.FromDocument(doc => doc.GetString(VcsKeys.RevisionSelector)))
             ).Case(RepositoryType.Git,
                 new StartProcess(Config.FromSetting(VersionedDocsKeys.GitExecutable, "git"))
+                    .WithArgument("-c")
+                    .WithArgument("advice.detachedHead=false")
                     .WithArgument("clone")
+                    .WithArgument("--quiet")
+                    .WithArgument("--depth")
+                    .WithArgument("1")
                     .WithArgument("--branch")
                     .WithArgument(Config.FromDocument(doc => doc.GetString(VcsKeys.RevisionSelector)))
                     .WithArgument(Config.FromSetting(VersionedDocsKeys.RepositoryPath))
@@ -80,7 +85,7 @@ public sealed class Vcs : Pipeline
                     .WithWorkingDirectory(Config.FromDocument(doc => doc.GetString(VcsKeys.RepositoryRoot)))
                     .WithArgument("log")
                     .WithArgument("-1")
-                    .WithArgument("--format='%H %ct'")
+                    .WithArgument("--format=%H %ct", true)
                     .WithArgument(Config.FromDocument(doc => doc.GetString(VcsKeys.RevisionSelector)))
             ),
             new SetMetadata(VcsKeys.RevisionId,
