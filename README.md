@@ -1,6 +1,6 @@
 # VersionedDocs
 
-[![VersionedDocs on NuGet](https://img.shields.io/nuget/v/VersionedDocs)](https://www.nuget.org/packages/VersionedDocs/)
+[![VersionedDocs on NuGet](https://img.shields.io/nuget/v/VersionedDocs)](https://www.nuget.org/packages/Ociaw.VersionedDocs/)
 [![Latest VersionedDocs release on GitHub](https://img.shields.io/github/v/tag/ociaw/VersionedDocs)](https://github.com/ociaw/VersionedDocs/releases/)
 
 VersionDocs builds on top of [Statiq Docs](https://www.statiq.dev/docs) to add support for versioned APIs. This allows documentation for
