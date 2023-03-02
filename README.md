@@ -1,5 +1,8 @@
 # VersionedDocs
 
+[![VersionedDocs on NuGet](https://img.shields.io/nuget/v/VersionedDocs)](https://www.nuget.org/packages/VersionedDocs/)
+[![Latest VersionedDocs release on GitHub](https://img.shields.io/github/v/tag/ociaw/VersionedDocs)](https://github.com/ociaw/VersionedDocs/releases/)
+
 VersionDocs builds on top of [Statiq Docs](https://www.statiq.dev/docs) to add support for versioned APIs. This allows documentation for
 multiple API versions to exist on the same site at once. For example, two separate library versions can be documented independently at
 `/api/v1.0` and `/api/v2.0`.
